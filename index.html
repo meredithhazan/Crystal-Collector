@@ -3,45 +3,59 @@
 <head>
   <title>Crystal Collector game</title>
  <link rel="stylesheet" type="text/css" href="assets/css/reset.css"> 
+ 
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 </head>
 <body>
+  <div class="container">
+    <div class="row">
+      <div id="crystals" class="col-xs-12 col-md-8 col-lg-12">
+    
+      
+      </div>
   
-  <h1>Let's play Crystals Collector!</h1>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-md-8">
+        <h1>Let's play Crystal Collector!</h1>
+        <p id="instructions-box">
+          <p>How to play:</p>
+          <ul>
+            <li><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> You will be given a random number at the start of the game.</li>
+            <li><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Above are four magical Billy Crystal characters, each containing a mystery value. By clicking on a Crystal, you will add a specific amount of points to your total score.</li>
+            <li><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> If you match your total score to the random number given, you win! But be careful, if your score goes higher than the random number, you lose.</li>
+            <li><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Each time the game starts, the Crystals will get a new mystery value.</li>
+          </ul>
+        </p> 
+      </div>
+      <div class="col-xs-6 col-md-4">
+        <div id="counter-box">
+          <h2><span id="results"></span></h2>
+          <h3><span id="playAgain"></span></h3>
+          <h3 id="spacing">Wins: <span id="wins"></span></h3>
+          <h3> Losses: <span id="losses"></span></h3>
+        </div>
+      </div>
+    </div>
+  
 
-  <p>How to play:</p><hr />
-  <p id="instructions-box">
-    <ul>
-      <li>You will be given a random number at the start of the game.</li>
-      <li>There are four magical crystals, each containing a mystery value. By clicking on a crystal, you will add a specific amount of points to your total score.</li>
-      <li>If you match your total score to the random number given, you win! But be careful, if your score goes higher than the random number, you lose.</li>
-      <li>Each time the game starts, the crystals will get a new mystery value.</li>
-    </ul>
-   </p> 
+  <h2>Number to Match: <span id="number-to-guess"></span></h2>
 
-  <h2>Number to Guess: <span id="number-to-guess"></span></h2>
-
-  <div id="crystals">
-   
-  </div>
+  <hr />
   <div id="score-container">
-    <p>Your total score is:</p>
-    <span id="total-score"></span>
+    <h2>Your total score is: <span id="total-score"></span></h2>
+    
   </div>
-  <div id="counter-box">
-    <h3>Wins: </h3>
-    <span id="wins"></span> 
-    <h3>Losses: </h3>
-    <span id="losses"></span>
-  </div>
-
+  
+</div>
 
 
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 
-  <script type="text/javascript" src="assets/javascript/game.js"></script>
-
+<script type="text/javascript" src="assets/javascript/game.js"></script>
+ 
   </body>
   </html>

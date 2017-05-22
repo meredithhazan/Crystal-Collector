@@ -1,0 +1,61 @@
+body {
+	background-image: url('pow-star.png');
+}
+
+.container {
+	width: 1160px;
+	margin: 0 auto;
+}
+
+
+
+#crystals {
+	text-align: center;
+	width: 100%;
+}
+
+.crystal-image {
+	margin: 10px;
+
+}
+
+.col-xs-12.col-md-8 {
+	padding-left: 25px;
+}
+
+h1, h3 {
+	color: #7BB2E8;
+}
+
+p, ul, h2 {
+	color: #707070;
+}
+
+
+
+.col-xs-6.col-md-4 {
+	padding-right: 25px;
+}
+
+
+#counter-box {
+	height: 229px;
+	border: 2px dotted #707070;
+	margin-top: 20px;
+	padding-left: 10px;
+}
+
+#spacing {
+	margin-top: 45px;
+	margin-bottom: 20px;
+}
+
+#results {	
+	font-size: 28px;
+}
+
+
+
+#total-score, #number-to-guess {
+	color: #4E7065;
+}

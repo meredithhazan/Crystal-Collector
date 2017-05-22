@@ -4,76 +4,86 @@ $(document).ready(function() {
 	var wins = 0;
 	var losses = 0;
 	var counter = 0;
-	var numOptions = new Array(4);
+	var crystals = ["assets/images/cry1.jpg", "assets/images/cry2.jpg", "assets/images/cry3.jpg", "assets/images/cry4.jpg"]
+	var targetNumber;
+	var gameRunning = false;
 
 	function newGame() {
 
 		// Randomly choose & display the targetNumber
-		var targetNumber = Math.floor(Math.random() * (120 - 19 + 1)) + 19;
+		targetNumber = Math.floor(Math.random() * (120 - 19 + 1)) + 19;
 		$("#number-to-guess").text(targetNumber);
 		//console.log("Target is" + targetNumber);
 
-		// Populate empty 4-item array with random numbers 1-12, loop 4 times
-		var numOptions = new Array(4);
-		for (var i = 0; i < numOptions.length; i++) {
-			numOptions[i] = Math.floor(Math.random() * 12) + 1;
-			console.log("Array is:" + numOptions);
-		}
-		// Assign values to crystal-images
-		// For each iteration, we will create an imageCrystal
-    	var imageCrystal1 = $("<img>");
-    	var imageCrystal2 = $("<img>");
-    	var imageCrystal3 = $("<img>");
-    	var imageCrystal4 = $("<img>");
-
-	    // First each crystal will be given the class ".crystal-image".
-	    // This will allow the CSS to take effect.
-	    //	Tried putting all the selectors together, incorrect syntax?
-	    //$("img.imageCrystal1, img.imageCrystal2, img.imageCrystal3, img.imageCrystal4").addClass("crystal-image");
-
-
-	    imageCrystal1.addClass("crystal-image");
-	    imageCrystal2.addClass("crystal-image");
-	    imageCrystal3.addClass("crystal-image");
-	    imageCrystal4.addClass("crystal-image");
-
-
-	    // Each imageCrystal will be given a src link to the crystal image
-	    
-	    /*imageCrystal1.attr("src", "assets/images/cry1.jpg"); 
-	    imageCrystal2.attr("src", "assets/images/cry2.jpg");
-	    imageCrystal3.attr("src", "assets/images/cry3.jpg");
-	    imageCrystal4.attr("src", "assets/images/cry4.jpg");
-*/
-	    // Below didn't work either to re-size images.	
-	    //$(".crystal-image").css({width : "240px", height : "240px"});
-	    
-	    // Each imageCrystal will be given a data attribute called data-crystalValue.
-	    // This data attribute will be set equal to the array value.
-	    imageCrystal1.attr("data-crystalvalue", numOptions[i]);
-	    imageCrystal2.attr("data-crystalvalue", numOptions[i]);
-	    imageCrystal3.attr("data-crystalvalue", numOptions[i]);
-	    imageCrystal4.attr("data-crystalvalue", numOptions[i]);
-
-	    $("#crystals").append(imageCrystal1, imageCrystal2, imageCrystal3, imageCrystal4);
+		//Populate empty 4-item array with random numbers 1-12, loop 4 times
 		
-	    console.log("Value is:" + imageCrystal1 + imageCrystal2);
-	    
-	    // Each imageCrystal will be given a src link to the crystal image
-	    
-	    imageCrystal1.attr("src", "assets/images/cry1.jpg"); 
-	    imageCrystal2.attr("src", "assets/images/cry2.jpg");
-	    imageCrystal3.attr("src", "assets/images/cry3.jpg");
-	    imageCrystal4.attr("src", "assets/images/cry4.jpg");
-
-
-	    // Lastly, each crystal image (with all it classes and attributes) will get added to the page.
-	  
+		for (var i = 0; i < crystals.length; i++) {
+			$("#crystals").append("<img src ='" + crystals[i] + "' id='ci" + i + "' class='crystal-image'/>");
+			$("#ci" + i).attr("data-crystalvalue", Math.floor(Math.random() * 12) + 1);
 
 		};
-	
+	        
+	    // Counter reset to 0
+	    $("#total-score").text(counter);
+	    // Clear results message
+	    $("#results").html("Click on any Crystal to begin.");
 
+		};
+
+
+
+	newGame();
+
+	$(".crystal-image").on("click", function() {
+
+    // Determining the crystal's value requires us to extract the value from the data attribute.
+    // Using the $(this) keyword specifies that we should be extracting the crystal value of the clicked crystal.
+    // Using the .attr("data-crystalvalue") allows us to grab the value out of the "data-crystalvalue" attribute.
+    // Since attributes on HTML elements are strings, we must convert it to an integer before adding to the counter
+    
+    	var audioElement = document.createElement("audio");
+      	audioElement.setAttribute("src", "assets/javascript/marvlous.mp3");
+
+    	var crystalValue = ($(this).attr("data-crystalvalue"));
+    	crystalValue = parseInt(crystalValue);
+    // We then add the crystalValue to the user's "counter" which is a global variable.
+    // Every click, from every crystal adds to the global counter.
+    	counter += crystalValue;
+
+    // All of the same game win-lose logic applies. So the rest remains unchanged.
+    	$("#total-score").text(counter);
+
+    	if (counter === targetNumber) {
+    		$("#results").html("Boom! You won!");
+    		$("#results").animate({ fontSize: "24px" }, 2000 );
+    		audioElement.play();
+    		wins++;
+    		$("#wins").text(wins);
+    		$("#playAgain").html("Press any key to play again.");
+    /*setTimeout(restart, 5000);
+
+	function restart() {
+		$("#results").html("Click any Crystal to begin again.");
+		$(".crystal-image").on("click", function() {
+			newGame();
+		});*/
+
+    	} else if (counter > targetNumber) {
+    		$("#results").html("Sorry, you lost.");
+    		losses++
+    		$("#losses").text(losses);
+    		$("#playAgain").html("Press any key to try again.");
+    	};
+			/*setTimeout(restart, 5000);*/
 	});
+	
+	$("#playAgain").keyup(function() {
+		newGame();
+	});
+		
+	
+});
+		
 
 	
 
