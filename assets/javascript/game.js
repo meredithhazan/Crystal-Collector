@@ -30,7 +30,24 @@ $(document).ready(function() {
 
 		};
 
+	function resetGame() {
+		targetNumber = 0;
+		counter = 0;
+		$("#total-score").text(counter);
+		targetNumber = Math.floor(Math.random() * (120 - 19 + 1)) + 19;
+		$("#number-to-guess").text(targetNumber);
 
+		for (var i = 0; i < crystals.length; i++) {
+		$("#ci" + i).attr("data-crystalvalue", Math.floor(Math.random() * 12) + 1);
+
+		};
+	        
+
+	    // Clear results message
+	    $("#results").html("Click on any Crystal to begin.");
+
+		};	
+	
 
 	newGame();
 
@@ -59,7 +76,8 @@ $(document).ready(function() {
     		audioElement.play();
     		wins++;
     		$("#wins").text(wins);
-    		$("#playAgain").html("Press any key to play again.");
+    		
+    		resetGame();
     /*setTimeout(restart, 5000);
 
 	function restart() {
@@ -72,17 +90,17 @@ $(document).ready(function() {
     		$("#results").html("Sorry, you lost.");
     		losses++
     		$("#losses").text(losses);
-    		$("#playAgain").html("Press any key to try again.");
+    		
+    		resetGame();
+
     	};
 			/*setTimeout(restart, 5000);*/
 	});
 	
-	$("#playAgain").keyup(function() {
-		newGame();
 	});
-		
 	
-});
+	
+
 		
 
 	
